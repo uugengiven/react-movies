@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Names from './names.js';
-import Movies from './movies.js';
+import Events from './events.js';
 import axios from 'axios';
 
 class App extends Component {
@@ -12,7 +12,8 @@ class App extends Component {
     this.state = { 
       name_value: 'John',
       names: ['diego', 'kira', 'andy', 'john'],
-      movies: [{Title: 'am I working?'}]          
+      movies: [],
+      events: []
   };
 
     this.change_textbox = this.change_textbox.bind(this);
@@ -31,9 +32,9 @@ class App extends Component {
   }
 
   click_search(event) {
-    axios.get(`http://www.omdbapi.com/?s=${this.state.name_value}&apikey=88025416`).then(
+    axios.get(`http://replayfxcalendar.azurewebsites.net/public`).then(
       (response) => {
-        this.setState({movies: response.data.Search})
+        this.setState({events: response.data});
       }
     );
   }
@@ -49,9 +50,8 @@ class App extends Component {
           Let's make some stuff
         </p>
         <input type="text" value={this.state.name_value} onChange={this.change_textbox}/>
-        <button onClick={this.click_search}>Add Name</button>
-        <Names list_of_names={this.state.names} />
-        <Movies list_of_movies = {this.state.movies} />
+        <button onClick={this.click_search}>Search</button>
+        <Events list_of_events = {this.state.events} search_term={this.state.name_value} />
       </div>
     );
   }
