@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   click_search(event) {
-    axios.get(`http://replayfxcalendar.azurewebsites.net/public`).then(
+    axios.get(`http://replayfxcalendar.azurewebsites.net/public/search?s=${this.state.name_value}`).then(
       (response) => {
         this.setState({events: response.data});
       }
@@ -51,7 +51,7 @@ class App extends Component {
         </p>
         <input type="text" value={this.state.name_value} onChange={this.change_textbox}/>
         <button onClick={this.click_search}>Search</button>
-        <Events list_of_events = {this.state.events} search_term={this.state.name_value} />
+        <Events list_of_events = {this.state.events} />
       </div>
     );
   }

@@ -6,10 +6,10 @@ class Events extends Component {
         return <div>{this.props.list_of_events.map(
             (value, i) => {
                 // if whatever they typed == value.title then return
-                if (value.title.includes(this.props.search_term))
-                {
+                //if (value.title.includes(this.props.search_term))
+                //{
                     return <EventItem event={value} key={i} />;
-                }
+                //}
             }
     )}</div>;
     }
